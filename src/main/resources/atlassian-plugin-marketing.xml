@@ -1,1 +1,5 @@
-<atlassian-plugin-marketing><compatibility><product name="jira" min="8.1.0" max="8.1.0"/></compatibility></atlassian-plugin-marketing>
+<atlassian-plugin-marketing>
+  <compatibility>
+    <product name="jira" min="8.1.0" max="8.1.0"/>
+  </compatibility>
+</atlassian-plugin-marketing>

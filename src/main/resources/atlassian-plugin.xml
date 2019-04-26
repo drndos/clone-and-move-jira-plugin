@@ -1,10 +1,62 @@
-<atlassian-plugin key="com.ideotechnologies.jira.plugins.clone-and-move-jira-plugin" name="Clone And Move JIRA Plugin" plugins-version="2"><plugin-info><description>This is the Clone and Move Plugin for Atlassian JIRA.</description><version>2.9.0</version><vendor name="Netapsys Conseil" url="http://atlassian.netapsys.fr/"/><application-version min="8.1.0" max="8.1.0"/><param name="atlassian-data-center-compatible">true</param><param name="plugin-icon">images/pluginIcon.png</param><param name="plugin-logo">images/pluginLogo.png</param><param name="plugin-banner">images/pluginBanner.png</param><param name="vendor-icon">images/vendorIcon.png</param><param name="vendor-logo">images/vendorLogo.png</param></plugin-info><resource type="i18n" name="i18n" location="i18n/com.netapsys.jira.plugins.clone-and-move-jira-plugin.cloneandmove"/><web-item key="CloneAndMoveIssueOperation" section="operations-operations" i18n-name-key="admin.issue.operations.cloneandmove"><description key="admin.issue.operations.cloneandmove.desc">Make a copy of an issue into another
-			project.</description><link linkId="clone_and_move_issue">/secure/CloneAndMoveIssueDetails!default.jspa?id=$!issue.id
-		</link><label key="issue.operations.cloneandmove"/><tooltip key="admin.issue.operations.cloneandmove.desc"/><condition class="com.atlassian.jira.plugin.webfragment.conditions.HasIssuePermissionCondition"><param name="permission">move</param></condition></web-item><webwork1 key="clone-and-move-webwork" i18n-name-key="admin.issue.actions.cloneandmove" name="Clone and Move Issue Action" class="java.lang.Object"><description key="admin.issue.actions.cloneandmove.desc">Action which clones and moves the issue.
-		</description><actions><action name="com.netapsys.jira.plugins.cloneandmove.web.action.issue.CloneAndMoveIssueDetails" alias="CloneAndMoveIssueDetails"><view name="input">/secure/templates/com/netapsys/jira/plugins/cloneandmove/web/action/issue/cloneandmoveissue-start.vm
-				</view><view name="success">/secure/templates/com/netapsys/jira/plugins/cloneandmove/web/action/issue/cloneandmoveissue-start.vm
-				</view><view name="error">/secure/templates/com/netapsys/jira/plugins/cloneandmove/web/action/issue/cloneandmoveissue-start.vm
-				</view><view name="view">/secure/templates/com/netapsys/jira/plugins/cloneandmove/web/action/issue/cloneandmoveissue-start.vm
-				</view><view name="invalidlicense">/secure/templates/com/netapsys/jira/plugins/cloneandmove/web/action/issue/cloneandmoveissue-start.vm
-				</view></action></actions></webwork1><component key="BuildVersionHelper" name="Build Version Helper" class="com.netapsys.jira.plugins.cloneandmove.helper.DefaultBuildVersionHelper"><interface>com.netapsys.jira.plugins.cloneandmove.helper.BuildVersionHelper"
-		</interface></component></atlassian-plugin>
+<atlassian-plugin key="com.ideotechnologies.jira.plugins.clone-and-move-jira-plugin"
+  name="Clone And Move JIRA Plugin" plugins-version="2">
+  <plugin-info>
+    <description>This is the Clone and Move Plugin for Atlassian JIRA.</description>
+    <version>2.9.0</version>
+    <vendor name="Netapsys Conseil" url="http://atlassian.netapsys.fr/"/>
+    <application-version min="8.1.0" max="8.1.0"/>
+    <param name="atlassian-data-center-compatible">true</param>
+    <param name="plugin-icon">images/pluginIcon.png</param>
+    <param name="plugin-logo">images/pluginLogo.png</param>
+    <param name="plugin-banner">images/pluginBanner.png</param>
+    <param name="vendor-icon">images/vendorIcon.png</param>
+    <param name="vendor-logo">images/vendorLogo.png</param>
+  </plugin-info>
+  <resource type="i18n" name="i18n"
+    location="i18n/com.netapsys.jira.plugins.clone-and-move-jira-plugin.cloneandmove"/>
+  <web-item key="CloneAndMoveIssueOperation" section="operations-operations"
+    i18n-name-key="admin.issue.operations.cloneandmove">
+    <description key="admin.issue.operations.cloneandmove.desc">Make a copy of an issue into another
+      project.
+    </description>
+    <link linkId="clone_and_move_issue">/secure/CloneAndMoveIssueDetails!default.jspa?id=$!issue.id
+    </link>
+    <label key="issue.operations.cloneandmove"/>
+    <tooltip key="admin.issue.operations.cloneandmove.desc"/>
+    <condition class="com.atlassian.jira.plugin.webfragment.conditions.HasIssuePermissionCondition">
+      <param name="permission">move</param>
+    </condition>
+  </web-item>
+  <webwork1 key="clone-and-move-webwork" i18n-name-key="admin.issue.actions.cloneandmove"
+    name="Clone and Move Issue Action" class="java.lang.Object">
+    <description key="admin.issue.actions.cloneandmove.desc">Action which clones and moves the
+      issue.
+    </description>
+    <actions>
+      <action
+        name="com.netapsys.jira.plugins.cloneandmove.web.action.issue.CloneAndMoveIssueDetails"
+        alias="CloneAndMoveIssueDetails">
+        <view name="input">
+          /secure/templates/com/netapsys/jira/plugins/cloneandmove/web/action/issue/cloneandmoveissue-start.vm
+        </view>
+        <view name="success">
+          /secure/templates/com/netapsys/jira/plugins/cloneandmove/web/action/issue/cloneandmoveissue-start.vm
+        </view>
+        <view name="error">
+          /secure/templates/com/netapsys/jira/plugins/cloneandmove/web/action/issue/cloneandmoveissue-start.vm
+        </view>
+        <view name="view">
+          /secure/templates/com/netapsys/jira/plugins/cloneandmove/web/action/issue/cloneandmoveissue-start.vm
+        </view>
+        <view name="invalidlicense">
+          /secure/templates/com/netapsys/jira/plugins/cloneandmove/web/action/issue/cloneandmoveissue-start.vm
+        </view>
+      </action>
+    </actions>
+  </webwork1>
+  <component key="BuildVersionHelper" name="Build Version Helper"
+    class="com.netapsys.jira.plugins.cloneandmove.helper.DefaultBuildVersionHelper">
+    <interface>com.netapsys.jira.plugins.cloneandmove.helper.BuildVersionHelper"
+    </interface>
+  </component>
+</atlassian-plugin>

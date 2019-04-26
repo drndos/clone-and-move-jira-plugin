@@ -8,7 +8,7 @@ public class DefaultBuildVersionHelper
   private static BuildUtilsInfo buildUtilsInfo;
 
   public DefaultBuildVersionHelper(BuildUtilsInfo buildUtilsInfo) {
-    buildUtilsInfo = buildUtilsInfo;
+    this.buildUtilsInfo = buildUtilsInfo;
   }
 
   public String getVersion() {

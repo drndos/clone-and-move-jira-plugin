@@ -1,8 +1,8 @@
 package com.netapsys.jira.plugins.cloneandmove.helper;
 
-public abstract interface BuildVersionHelper {
+public interface BuildVersionHelper {
 
-  public abstract String getVersion();
+  String getVersion();
 
-  public abstract String getCurrentBuildNumber();
+  String getCurrentBuildNumber();
 }
