@@ -1,0 +1,122 @@
+<html>
+<head>
+
+#if ($action.issueValid && $!action.originalIssue)
+<meta content="issueaction" name="decorator" />
+#else
+<meta content="error" name="decorator" />
+#end
+<title>${i18n.getText("admin.issue.operations.cloneandmove")}</title>
+</head>
+<body class="type-a">
+			<div class="content intform">
+			##&& ${action.isHasIssuePermission("create", $action.issue)}
+			#if(${action.issueValid} && $!{action.originalIssue} && ${action.hasIssuePermission("CREATE_ISSUES", $action.issueObject)})
+				<form action="CloneAndMoveIssueDetails.jspa" class="aui" id="assign-issue" method="post">
+					<div class="content-body">
+						<div class="hidden">
+							<input name="atl_token" type="hidden" value="$action.xsrfToken"/>
+						</div>
+					</div>
+					<h2 class="dialog-title">
+						${i18n.getText("admin.issue.operations.cloneandmove")}
+						<span style="display: none; " class="header-separator">:</span>
+						<a class="header-issue-key" style="display: none; " title="" href="${action.issuePath}">$issue.key</a>
+					</h2>
+					<div class="aui-message info">
+						<span class="aui-icon icon-info"> </span>
+						<p>${i18n.getText("cloneissue.step1.desc")}</p>
+					</div>
+					<div class="hidden">
+						<input name="id" type="hidden" value="$issue.id"/>
+					</div>
+					#if($action.originalIssue) 
+						<fieldset>
+							<legend>
+								<span>${i18n.getText("cloneissue.clone.options.legend")}</span>
+							</legend>
+							<div class="field-group">
+								<label for="summary">
+									${i18n.getText("gadget.quickcreate.summary")}
+									<span class="aui-icon icon-required"></span>
+									<span class="content">${i18n.getText("admin.common.words.required")}</span>
+								</label>
+								<input class="text long-field" id="summary" maxlength="255" name="summary" type="text" value="$textutils.htmlEncode($issue.summary)"/>
+							</div>
+							<fieldset class="group ">
+								#if($action.displayCopySubTasks)
+									<div class="field-group">
+										<input checked="checked" class="checkbox" id="assign-issue-clone-subtasks" name="cloneSubTasks" type="checkbox" value="true"/>
+										<label for="assign-issue-clone-subtasks">${i18n.getText("cloneissue.clone.subtasks.label")}</label>
+                					</div>
+								#end
+							
+								#if($action.displayCopyAttachments)
+                                	<div class="field-group">
+										<input class="checkbox" id="assign-issue-clone-attachments" name="cloneAttachments" type="checkbox" value="true"/>
+										<label for="assign-issue-clone-attachments">${i18n.getText("cloneissue.clone.attachments.label")}</label>
+									</div>
+                            	#end
+							
+								#if($action.displayCopyLink)
+									<div class="field-group">
+										<input class="checkbox" id="assign-issue-clone-links" name="cloneLinks" type="checkbox" value="true"/>
+										<label for="assign-issue-clone-links">${i18n.getText("cloneissue.clone.issuelinks.label")}</label>
+									</div>
+								#end
+							</fieldset>
+						</fieldset>
+					#end
+					<div class="buttons-container content-footer">
+						<div class="buttons">
+							<input accesskey="S" class="button" id="assign-issue-submit" name="Create" title="${i18n.getText("common.forms.submit.tooltip",["Alt","S"])}" type="submit" value="${i18n.getText("cloneissue.create")}"/>
+							<a accesskey="`" class="cancel" href="${req.contextPath}${action.issuePath}" id="assign-issue-cancel" title="${i18n.getText("AUI.form.cancel.link.tooltip",["Alt","`"])}">${i18n.getText("common.forms.cancel")}</a>
+						</div>
+					</div>
+				</form>
+			
+    		#else
+    			##jira/src/webapp/decorators/panels/auiissueerrorpanel.jsp
+				<div class="content-body jira-error">
+    				<h2 class="error-title">${i18n.getText("admin.issue.operations.cloneandmove")}</h2>
+    					#if($action.hasErrorMessages)
+        					<div class="aui-message warning">
+            					<p>
+                					<span class="svg-icon warning size-18"></span>
+                			    	#foreach ($error in $action.getFlushedErrorMessages())
+                            			<li>$textutils.htmlEncode(${error})</li>
+                        			#end
+            					</p>
+        					</div>
+    					#end
+    					<div class="error-description notify warn">
+        					##if the issue exists show the permission error and login link
+        					#if($action.issueExists)
+            					<p>
+                					<li>${i18n.getText("perm.violation.desc")}</li>
+            					</p>
+            					##If we're viewing a valid issue but aren't logged in, show the login warning
+            					#if($!{action.remoteUser})
+                					<p>	
+                						#set ( $connect1 = $textutils.htmlEncode(${i18n.getText("login.required.login")}))
+                						#set ( $connect = "<a class='lnk' rel='nofollow' href='/login.jsp?os_destination=%2Fbrowse%2F'>$connect1</a>")
+                						#set ( $signup1 = "<a href='" )
+                						#set ( $signup2 = "Signup!default.jspa'>" )
+                						#set ( $signup = "$signup1${req.contextPath}$signup2" )
+                    					#if($action.isPublicMode())
+                    						<li>${i18n.getText("login.required.signup.description",[$connect,$signup,"</a>"])}</li>
+                        				#else
+                        					<li>${i18n.getText("login.required.description",[$connect])}</li>
+                        				#end
+                        			</p>
+            						<p>
+            							<li>${i18n.getText("contact.admin.for.perm",['<a href="Administrators.jspa">','</a>'])}</li>
+                					</p>
+        						#end
+    						#end
+    					</div>
+    		#end
+    		</div>
+</body>
+
+</html>

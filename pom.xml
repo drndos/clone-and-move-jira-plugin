@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.netapsys.jira.plugins</groupId>
+  <artifactId>clone-and-move-jira-plugin</artifactId>
+  <version>2.9.0</version>
+  <properties>
+    <atlassian.plugin.key>com.ideotechnologies.jira.plugins.clone-and-move-jira-plugin
+    </atlassian.plugin.key>
+    <amps.version>6.3.21</amps.version>
+
+    <jira.version>8.1.0</jira.version>
+    <jira.data.version>8.1.0</jira.data.version>
+    <atlassian.plugin.application.version.min>8.1.0</atlassian.plugin.application.version.min>
+    <atlassian.plugin.application.version.max>8.1.0</atlassian.plugin.application.version.max>
+  </properties>
+  <organization>
+    <name>Netapsys Conseil</name>
+    <url>http://atlassian.netapsys.fr/</url>
+  </organization>
+  <name>Clone And Move JIRA Plugin</name>
+  <description>This is the Clone and Move Plugin for Atlassian JIRA.</description>
+  <packaging>atlassian-plugin</packaging>
+  <licenses>
+    <license>
+      <name>Apache 2</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+      <comments>A business-friendly OSS license</comments>
+    </license>
+  </licenses>
+  <issueManagement>
+    <system>JIRA</system>
+    <url>https://studio.plugins.atlassian.com/browse/JCLOMV</url>
+  </issueManagement>
+  <scm>
+    <connection>scm:git:https://gitlab.netapsys.fr/netapsys/jira-clone-and-move.git</connection>
+    <developerConnection>scm:git:https://gitlab.netapsys.fr/netapsys/jira-clone-and-move.git
+    </developerConnection>
+    <url>https://gitlab.netapsys.fr/netapsys/jira-clone-and-move</url>
+  </scm>
+  <developers>
+    <developer>
+      <id>mychan</id>
+      <name>Mei Yan Chan</name>
+      <organization>Atlassian</organization>
+      <roles>
+        <role>developer</role>
+        <role>inventor</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>v.thoule</id>
+      <name>Vincent Thoule</name>
+      <organization>Alkaes Consulting</organization>
+      <organizationUrl>http://www.alkaes.com/</organizationUrl>
+      <roles>
+        <role>developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>carl.otz</id>
+      <name>Carl OTZ</name>
+      <organization>Netapsys Conseil</organization>
+      <organizationUrl>http://www.netapsys.fr/</organizationUrl>
+      <roles>
+        <role>developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>q.bellego</id>
+      <name>Quentin BELLEGO</name>
+      <organization>Netapsys Conseil</organization>
+      <organizationUrl>http://www.netapsys.fr/</organizationUrl>
+      <roles>
+        <role>developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>f.bebel</id>
+      <name>Franck BEBEL</name>
+      <organization>Netapsys Conseil</organization>
+      <organizationUrl>http://www.netapsys.fr/</organizationUrl>
+      <roles>
+        <role>developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>d.nadaski</id>
+      <name>David NADASKI</name>
+      <organization>Netapsys Conseil</organization>
+      <organizationUrl>http://www.netapsys.fr/</organizationUrl>
+      <roles>
+        <role>developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>t.quesada</id>
+      <name>Timothée QUESADA</name>
+      <organization>Netapsys Conseil</organization>
+      <organizationUrl>http://www.netapsys.fr/</organizationUrl>
+      <roles>
+        <role>developer</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>a.mauvezin</id>
+      <name>Arthur Mauvezin</name>
+      <organization>Netapsys Conseil</organization>
+      <organizationUrl>http://www.netapsys.fr/</organizationUrl>
+      <roles>
+        <role>developer</role>
+      </roles>
+    </developer>
+  </developers>
+  <dependencies>
+    <dependency>
+      <groupId>com.atlassian.jira</groupId>
+      <artifactId>jira-core</artifactId>
+      <version>${jira.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.7</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.atlassian.jira</groupId>
+      <artifactId>jira-func-tests</artifactId>
+      <version>${jira.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.atlassian.maven.plugins</groupId>
+        <artifactId>maven-jira-plugin</artifactId>
+        <version>${amps.version}</version>
+        <extensions>true</extensions>
+        <configuration>
+          <productVersion>${jira.version}</productVersion>
+          <productDataVersion>${jira.data.version}</productDataVersion>
+          <enableQuickReload>true</enableQuickReload>
+          <enableFastdev>false</enableFastdev>
+          <jvmArgs>-Xmx1G</jvmArgs>
+          <!-- <productDataPath>${basedir}/src/test/resources/generated-test-resources.zip</productDataPath> -->
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+    </plugins>
+
+  </build>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>atlassian-public</id>
+      <url>https://packages.atlassian.com/mvn/maven-external/</url>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+        <checksumPolicy>warn</checksumPolicy>
+      </snapshots>
+      <releases>
+        <enabled>true</enabled>
+        <checksumPolicy>warn</checksumPolicy>
+      </releases>
+    </pluginRepository>
+  </pluginRepositories>
+
+  <repositories>
+    <repository>
+      <id>atlassian-public</id>
+      <url>https://packages.atlassian.com/mvn/maven-external/</url>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+        <checksumPolicy>warn</checksumPolicy>
+      </snapshots>
+      <releases>
+        <enabled>true</enabled>
+        <checksumPolicy>warn</checksumPolicy>
+      </releases>
+    </repository>
+    <repository>
+      <id>essentialdata-maven-all</id>
+      <url>https://repo.essential-data.sk/repository/maven-all/</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+    </repository>
+  </repositories>
+</project>
