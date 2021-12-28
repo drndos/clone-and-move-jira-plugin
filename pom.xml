@@ -6,16 +6,16 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.netapsys.jira.plugins</groupId>
   <artifactId>clone-and-move-jira-plugin</artifactId>
-  <version>2.9.0</version>
+  <version>2.10.0</version>
   <properties>
     <atlassian.plugin.key>com.ideotechnologies.jira.plugins.clone-and-move-jira-plugin
     </atlassian.plugin.key>
-    <amps.version>6.3.21</amps.version>
+    <amps.version>8.3.1</amps.version>
 
-    <jira.version>8.1.0</jira.version>
-    <jira.data.version>8.1.0</jira.data.version>
-    <atlassian.plugin.application.version.min>8.1.0</atlassian.plugin.application.version.min>
-    <atlassian.plugin.application.version.max>8.1.0</atlassian.plugin.application.version.max>
+    <jira.version>8.21.0</jira.version>
+    <jira.data.version>8.21.0</jira.data.version>
+    <atlassian.plugin.application.version.min>8.21.0</atlassian.plugin.application.version.min>
+    <atlassian.plugin.application.version.max>8.21.0</atlassian.plugin.application.version.max>
   </properties>
   <organization>
     <name>Netapsys Conseil</name>
@@ -126,7 +126,7 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.7</version>
+      <version>4.13.2</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -140,7 +140,7 @@
     <plugins>
       <plugin>
         <groupId>com.atlassian.maven.plugins</groupId>
-        <artifactId>maven-jira-plugin</artifactId>
+        <artifactId>jira-maven-plugin</artifactId>
         <version>${amps.version}</version>
         <extensions>true</extensions>
         <configuration>

@@ -1,7 +1,6 @@
 package com.netapsys.jira.plugins.cloneandmove.web.action.issue;
 
 import com.atlassian.jira.bc.issue.CloneIssueCommand;
-import com.atlassian.jira.bc.issue.CloneIssueCommand.CloneIssueResult;
 import com.atlassian.jira.bc.issue.IssueService;
 import com.atlassian.jira.component.ComponentAccessor;
 import com.atlassian.jira.component.pico.ComponentManager;
@@ -20,27 +19,20 @@ import com.atlassian.jira.issue.fields.FieldManager;
 import com.atlassian.jira.issue.link.IssueLinkManager;
 import com.atlassian.jira.issue.link.IssueLinkTypeManager;
 import com.atlassian.jira.issue.link.RemoteIssueLinkManager;
-import com.atlassian.jira.project.ProjectFactory;
-import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.jira.security.PermissionManager;
-import com.atlassian.jira.task.TaskDescriptor;
 import com.atlassian.jira.task.TaskManager;
 import com.atlassian.jira.user.ApplicationUser;
 import com.atlassian.jira.web.action.issue.CloneIssueDetails;
 import com.atlassian.jira.web.action.issue.IssueCreationHelperBean;
-import com.atlassian.jira.web.bean.TaskDescriptorBean;
 import com.atlassian.jira.web.bean.TaskDescriptorBean.Factory;
-import com.netapsys.jira.plugins.cloneandmove.helper.BuildVersionHelper;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class CloneAndMoveIssueDetails
-    extends CloneIssueDetails {
+public class CloneAndMoveIssueDetails extends CloneIssueDetails {
 
   private static final long serialVersionUID = 2609713011534627159L;
   private static final Pattern NOCLONE_PATTERN = Pattern.compile(".*<!--\\s*noclone\\s*-->.*");
@@ -49,24 +41,21 @@ public class CloneAndMoveIssueDetails
   private final TaskManager taskManager;
 
 
-  public CloneAndMoveIssueDetails(ApplicationProperties applicationProperties,
-      PermissionManager permissionManager, IssueLinkManager issueLinkManager,
-      RemoteIssueLinkManager remoteIssueLinkManager, IssueLinkTypeManager issueLinkTypeManager,
-      SubTaskManager subTaskManager, AttachmentManager attachmentManager, FieldManager fieldManager,
-      IssueCreationHelperBean issueCreationHelperBean, IssueFactory issueFactory,
-      IssueService issueService, BuildVersionHelper buildVersionHelper,
-      TemporaryAttachmentsMonitorLocator temporaryAttachmentsMonitorLocator,
-      ProjectFactory projectFactory, TaskManager taskManager) {
-    super(applicationProperties, permissionManager, issueLinkManager, issueLinkTypeManager,
+  public CloneAndMoveIssueDetails(ApplicationProperties applicationProperties, PermissionManager permissionManager,
+      IssueLinkManager issueLinkManager, RemoteIssueLinkManager remoteIssueLinkManager,
+      IssueLinkTypeManager issueLinkTypeManager, SubTaskManager subTaskManager, AttachmentManager attachmentManager,
+      FieldManager fieldManager, IssueCreationHelperBean issueCreationHelperBean, IssueFactory issueFactory,
+      IssueService issueService, TemporaryAttachmentsMonitorLocator temporaryAttachmentsMonitorLocator,
+      TaskManager taskManager) {
+    super(applicationProperties, permissionManager, issueLinkManager, remoteIssueLinkManager, issueLinkTypeManager,
         subTaskManager, attachmentManager, fieldManager, issueCreationHelperBean, issueFactory,
         issueService, temporaryAttachmentsMonitorLocator, taskManager,
-        (TaskDescriptorBean.Factory) ComponentManager.getInstance()
-            .getComponentInstanceOfType(TaskDescriptorBean.Factory.class));
+        ComponentManager.getInstance().getComponentInstanceOfType(Factory.class));
     this.taskManager = taskManager;
   }
 
   public String getRedirect(String defaultUrl) {
-    String moveURL = defaultUrl;
+    String moveURL;
     IssueManager issueManager = getIssueManager();
     if ((this.taskManager.getTask(getCurrentTask().getTaskDescriptor().getTaskId()).isFinished())
         && (!this.taskManager.getTask(getCurrentTask().getTaskDescriptor().getTaskId())
@@ -92,8 +81,7 @@ public class CloneAndMoveIssueDetails
   }
 
 
-  public String doDefault()
-      throws Exception {
+  public String doDefault() {
     setCloneSubTasks(true);
     setCloneLinks(false);
     setCloneAttachments(false);
@@ -103,9 +91,7 @@ public class CloneAndMoveIssueDetails
       if ((summary != null) && (!"".equals(summary))) {
         getFieldValuesHolder().put("summary", summary);
       }
-    } catch (IssueNotFoundException e) {
-      return "error";
-    } catch (IssuePermissionException e) {
+    } catch (IssueNotFoundException | IssuePermissionException e) {
       return "error";
     }
     return "input";
@@ -129,7 +115,7 @@ public class CloneAndMoveIssueDetails
     List<CustomField> modifiedCustomField = new ArrayList(super.getCustomFields(issue));
     Iterator<CustomField> customFieldsIterator = modifiedCustomField.iterator();
     while (customFieldsIterator.hasNext()) {
-      CustomField customField = (CustomField) customFieldsIterator.next();
+      CustomField customField = customFieldsIterator.next();
       String description = customField.getDescription();
       try {
         Matcher matcher = NOCLONE_PATTERN.matcher(description);

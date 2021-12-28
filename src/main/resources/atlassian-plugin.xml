@@ -2,9 +2,9 @@
   name="Clone And Move JIRA Plugin" plugins-version="2">
   <plugin-info>
     <description>This is the Clone and Move Plugin for Atlassian JIRA.</description>
-    <version>2.9.0</version>
-    <vendor name="Netapsys Conseil" url="http://atlassian.netapsys.fr/"/>
-    <application-version min="8.1.0" max="8.1.0"/>
+    <version>2.10.0</version>
+    <vendor name="Essential data" url="https://www.essential-data.sk/"/>
+    <application-version min="8.21.0" max="8.21.0"/>
     <param name="atlassian-data-center-compatible">true</param>
     <param name="plugin-icon">images/pluginIcon.png</param>
     <param name="plugin-logo">images/pluginLogo.png</param>
